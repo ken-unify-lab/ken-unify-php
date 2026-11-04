@@ -1,6 +1,7 @@
-FROM composer:2 AS build
+FROM php:8.3-cli-alpine AS build
+COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
 WORKDIR /app
-RUN apk add --no-cache $PHPIZE_DEPS libxml2-dev oniguruma-dev \
+RUN apk add --no-cache $PHPIZE_DEPS libxml2-dev oniguruma-dev git unzip \
     && docker-php-ext-install dom mbstring xml xmlwriter
 COPY composer.json app.php ./
 COPY tests ./tests
