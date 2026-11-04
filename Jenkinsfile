@@ -66,7 +66,7 @@ spec:
           env.SOURCE_SHA = revision.GIT_COMMIT
           env.EXPECTED_SHA = revision.GIT_COMMIT
         }
-        sh 'git log -1 --format=%H'
+        echo "Checked out source revision: ${env.SOURCE_SHA}"
       }
     }
     stage('PHPUnit tests') {
